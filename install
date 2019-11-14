@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+# dotfiles
+#
+# Copyright 2019 Andrew Countryman <apcountryman@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
+# file except in compliance with the License. You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under
+# the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+
+# File: install
+# Description: Dotfiles install script.
+
+function error()
+{
+    local -r param_message="$1"
+
+    ( >&2 echo "$MNEMONIC: $param_message" )
+}
+
+function abort()
+{
+    if [[ "$#" -gt 0 ]]; then
+        local -r param_message="$1"
+
+        error "$param_message, aborting"
+    fi
+
+    exit 1
+}
+
+function display_help_text()
+{
+    echo "NAME"
+    echo "    $MNEMONIC - Install dotfiles."
+    echo "SYNOPSIS"
+    echo "    $MNEMONIC --help"
+    echo "    $MNEMONIC --version"
+    echo "    $MNEMONIC"
+    echo "OPTIONS"
+    echo "    --help"
+    echo "        Display this help text."
+    echo "    --version"
+    echo "        Display the version of this script."
+    echo "EXAMPLES"
+    echo "    $MNEMONIC --help"
+    echo "    $MNEMONIC --version"
+    echo "    $MNEMONIC"
+}
+
+function display_version()
+{
+    echo "$MNEMONIC, version $( git -C "$REPOSITORY" describe --always --dirty --broken )"
+}
+
+function main()
+{
+    SCRIPT=$( readlink -f "$0" ); readonly SCRIPT
+    MNEMONIC=$( basename "$SCRIPT" ); readonly MNEMONIC
+    REPOSITORY=$( dirname "$SCRIPT" ); readonly REPOSITORY
+
+    while [[ "$#" -gt 0 ]]; do
+        local argument="$1"
+        shift
+
+        case "$argument" in
+            --help)
+                display_help_text
+                exit
+                ;;
+            --version)
+                display_version
+                exit
+                ;;
+            --*)
+                ;&
+            -*)
+                abort "'$argument' is not a supported option"
+                ;;
+            *)
+                abort "'$argument' is not a valid argument"
+                ;;
+        esac
+    done
+}
+
+main "$@"
