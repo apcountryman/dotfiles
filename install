@@ -146,7 +146,7 @@ function main()
     MNEMONIC=$( basename "$SCRIPT" ); readonly MNEMONIC
     REPOSITORY=$( dirname "$SCRIPT" ); readonly REPOSITORY
 
-    mapfile -t SUPPORTED_DOTFILES < <( cd "$REPOSITORY" && git ls-files -- ':!:.gitmodules' | cut -d / -f 1 | sort -u | xargs -r -d '\n' -I '{}' find {} -maxdepth 0 -name '.*' ); readonly SUPPORTED_DOTFILES
+    mapfile -t SUPPORTED_DOTFILES < <( cd "$REPOSITORY" && git ls-files -- . ':!:.gitmodules' | cut -d / -f 1 | sort -u | xargs -r -d '\n' -I '{}' find {} -maxdepth 0 -name '.*' ); readonly SUPPORTED_DOTFILES
 
     local dotfiles=()
 

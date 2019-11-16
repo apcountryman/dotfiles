@@ -93,7 +93,7 @@ function ensure_no_script_errors_are_present()
     message "checking for script errors ........................ "
 
     local scripts
-    mapfile -t scripts < <( git -C "$REPOSITORY" ls-files -- ':!:.vim/extensions/vim-plug' | xargs -r -d '\n' -I '{}' find "$REPOSITORY/"{} -executable ); readonly scripts
+    mapfile -t scripts < <( git -C "$REPOSITORY" ls-files -- . ':!:.vim/extensions/vim-plug' | xargs -r -d '\n' -I '{}' find "$REPOSITORY/"{} -executable ); readonly scripts
 
     if ! shellcheck "${scripts[@]}" >/dev/null 2>&1; then
         errors_found
