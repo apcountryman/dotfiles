@@ -3,6 +3,10 @@ UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
 
+## [0.1.1](https://github.com/apcountryman/dotfiles/compare/0.1.0...0.1.1) - 2019-11-16
+### Fixed
+- [All-exclusionary pathspec patterns are not supported by older versions of Git](https://github.com/apcountryman/dotfiles/issues/9).
+
 ## [0.1.0](https://github.com/apcountryman/dotfiles/compare/cd276ce3083f6c130eae8b134a82247847ce06ed...0.1.0) - 2019-11-16
 ### Added
 - Repository/user Git ignore rules.
