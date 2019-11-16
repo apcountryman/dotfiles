@@ -20,3 +20,6 @@
 
 # ignore Vim extensions
 .vim/extensions/
+
+# ignore Vim netrwhist
+.vim/.netrwhist
