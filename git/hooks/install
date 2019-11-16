@@ -91,10 +91,11 @@ function install_hooks()
 function main()
 {
     SCRIPT=$( readlink -f "$0" ); readonly SCRIPT
-    HOOKS=$( dirname "$SCRIPT" ); readonly HOOKS
     MNEMONIC=$( basename "$SCRIPT" ); readonly MNEMONIC
+    HOOKS=$( dirname "$SCRIPT" ); readonly HOOKS
     REPOSITORY=$( readlink -f "$HOOKS/../.." ); readonly REPOSITORY
-    mapfile -t SUPPORTED_HOOKS < <( find "$HOOKS" -name "$MNEMONIC" -prune -o -executable -type f -printf '%f\n' ); readonly SUPPORTED_HOOKS
+
+    mapfile -t SUPPORTED_HOOKS < <( git -C "$REPOSITORY" ls-files -- 'git/hooks/' | xargs -r -d '\n' -I '{}' find "$REPOSITORY/"{} -name "$MNEMONIC" -prune -o -executable -printf '%f\n' ); readonly SUPPORTED_HOOKS
 
     local hooks=()
 
@@ -124,6 +125,8 @@ function main()
                 ;;
         esac
     done
+
+    readonly hooks
 
     validate_hooks "${hooks[@]}"
     install_hooks "${hooks[@]}"

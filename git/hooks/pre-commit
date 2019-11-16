@@ -92,7 +92,8 @@ function ensure_no_script_errors_are_present()
 {
     message "checking for script errors ........................ "
 
-    mapfile -t scripts < <( git -C "$REPOSITORY" ls-files | xargs -r -d '\n' -I '{}' find "$REPOSITORY/"{} -executable )
+    local scripts
+    mapfile -t scripts < <( git -C "$REPOSITORY" ls-files -- ':!:.vim/extensions/vim-plug' | xargs -r -d '\n' -I '{}' find "$REPOSITORY/"{} -executable ); readonly scripts
 
     if ! shellcheck "${scripts[@]}" >/dev/null 2>&1; then
         errors_found
@@ -107,8 +108,8 @@ function ensure_no_script_errors_are_present()
 function main()
 {
     SCRIPT=$( readlink -f "$0" ); readonly SCRIPT
-    HOOKS=$( dirname "$SCRIPT" ); readonly HOOKS
     MNEMONIC=$( basename "$SCRIPT" ); readonly MNEMONIC
+    HOOKS=$( dirname "$SCRIPT" ); readonly HOOKS
     REPOSITORY=$( readlink -f "$HOOKS/../.." ); readonly REPOSITORY
 
     while [[ "$#" -gt 0 ]]; do
