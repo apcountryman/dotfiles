@@ -32,3 +32,10 @@ set nojoinspaces
 set number
 set wildmenu
 syntax on
+
+" indentation
+set autoindent
+set expandtab
+set shiftround
+set shiftwidth=4
+set tabstop=4
