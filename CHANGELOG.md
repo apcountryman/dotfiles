@@ -10,3 +10,4 @@ UTC is used when determining release dates.
 - Project README.
 - Project CHANGELOG.
 - [Dotfiles install script](https://github.com/apcountryman/dotfiles/issues/1).
+- [Vim configuration](https://github.com/apcountryman/dotfiles/issues/2).

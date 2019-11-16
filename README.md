@@ -4,11 +4,11 @@ Andrew Countryman's personal dotfiles.
 ## Obtaining the Source Code
 HTTPS:
 ```
-git clone https://github.com/apcountryman/dotfiles.git
+git clone --recurse-submodules https://github.com/apcountryman/dotfiles.git
 ```
 SSH:
 ```
-git clone git@github.com:apcountryman/dotfiles.git
+git clone --recurse-submodules git@github.com:apcountryman/dotfiles.git
 ```
 
 ## Git Hooks

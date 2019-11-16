@@ -14,3 +14,12 @@
 
 # File: .gitignore
 # Description: Git ignore rules for the dotfiles repository and user.
+
+# ignore Vim swap files
+*.sw*
+
+# ignore Vim extensions
+.vim/extensions/
+
+# ignore Vim netrwhist
+.vim/.netrwhist
