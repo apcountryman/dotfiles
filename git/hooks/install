@@ -126,6 +126,8 @@ function main()
         esac
     done
 
+    readonly hooks
+
     validate_hooks "${hooks[@]}"
     install_hooks "${hooks[@]}"
 }
