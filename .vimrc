@@ -17,4 +17,9 @@
 
 " plugins
 call plug#begin( '$HOME/.vim/extensions' )
+    " color scheme
+    Plug 'nanotech/jellybeans.vim'
 call plug#end()
+
+" user interface
+colorscheme jellybeans

@@ -17,3 +17,6 @@
 
 # ignore Vim swap files
 *.sw*
+
+# ignore Vim extensions
+.vim/extensions/
