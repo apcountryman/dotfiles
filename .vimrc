@@ -23,3 +23,9 @@ call plug#end()
 
 " user interface
 colorscheme jellybeans
+set foldmethod=syntax
+set mouse=a
+set nojoinspaces
+set number
+set wildmenu
+syntax on
