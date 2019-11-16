@@ -11,6 +11,12 @@ SSH:
 git clone --recurse-submodules git@github.com:apcountryman/dotfiles.git
 ```
 
+## Usage
+See the `install` script's help text for usage details.
+```
+$ ./install --help
+```
+
 ## Git Hooks
 To install this repository's Git hooks, run the `install` script located in the
 `git/hooks` directory. See the script's help text for usage details.
