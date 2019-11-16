@@ -96,6 +96,50 @@ function validate_dotfiles()
     done
 }
 
+function install_dotfile()
+{
+    local param_dotfile="$1"
+
+    local dotfile="$HOME/$param_dotfile"
+
+    if [[ -L "$dotfile" ]]; then
+        rm "$dotfile"
+    fi
+
+    if [[ -e "$dotfile" ]]; then
+        local archive="$HOME/dotfiles-archive"
+        local archived_dotfile="$archive/$param_dotfile"
+
+        if [[ ! -d "$archive" ]]; then
+            if ! mkdir "$archive" >/dev/null; then
+                abort "archive directory creation failure"
+            fi
+        fi
+
+        if [[ -e "$archived_dotfile" ]]; then
+            abort "'$param_dotfile' archive already exists"
+        fi
+
+        if ! mv "$dotfile" "$archived_dotfile"; then
+            abort "'$param_dotfile' archive creation failure"
+        fi
+    fi
+
+    if ! ln -s "$REPOSITORY/$param_dotfile" "$dotfile"; then
+        abort "'$param_dotfile' installation failure"
+    fi
+}
+
+function install_dotfiles()
+{
+    while [[ "$#" -gt 0 ]]; do
+        local param_dotfile="$1"
+        shift
+
+        install_dotfile "$param_dotfile"
+    done
+}
+
 function main()
 {
     SCRIPT=$( readlink -f "$0" ); readonly SCRIPT
@@ -137,6 +181,7 @@ function main()
     readonly dotfiles
 
     validate_dotfiles "${dotfiles[@]}"
+    install_dotfiles "${dotfiles[@]}"
 }
 
 main "$@"
