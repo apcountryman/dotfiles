@@ -21,6 +21,9 @@ call plug#begin( '$HOME/.vim/extensions' )
     Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
+" general
+set history=256
+
 " user interface
 colorscheme jellybeans
 set foldmethod=syntax
