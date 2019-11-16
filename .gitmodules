@@ -14,3 +14,8 @@
 
 # File: .gitmodules
 # Description: Git submodules of the dotfiles repository.
+
+# vim-plug (Vim plugin manager)
+[submodule ".vim/extensions/vim-plug"]
+	path = .vim/extensions/vim-plug
+	url = https://github.com/junegunn/vim-plug.git

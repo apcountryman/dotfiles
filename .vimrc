@@ -14,3 +14,7 @@
 
 " File: .vimrc
 " Description: Vim configuration
+
+" plugins
+call plug#begin( '$HOME/.vim/extensions' )
+call plug#end()
