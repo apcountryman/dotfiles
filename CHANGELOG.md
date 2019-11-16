@@ -9,3 +9,4 @@ UTC is used when determining release dates.
 - Project license (Apache License, Version 2.0).
 - Project README.
 - Project CHANGELOG.
+- [Dotfiles install script](https://github.com/apcountryman/dotfiles/issues/1).

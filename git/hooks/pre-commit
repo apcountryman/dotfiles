@@ -107,8 +107,8 @@ function ensure_no_script_errors_are_present()
 function main()
 {
     SCRIPT=$( readlink -f "$0" ); readonly SCRIPT
-    HOOKS=$( dirname "$SCRIPT" ); readonly HOOKS
     MNEMONIC=$( basename "$SCRIPT" ); readonly MNEMONIC
+    HOOKS=$( dirname "$SCRIPT" ); readonly HOOKS
     REPOSITORY=$( readlink -f "$HOOKS/../.." ); readonly REPOSITORY
 
     while [[ "$#" -gt 0 ]]; do
