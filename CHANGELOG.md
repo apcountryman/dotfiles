@@ -2,6 +2,8 @@
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
+### Fixed
+- [Git hooks install script does not require that hooks be tracked/staged in Git](https://github.com/apcountryman/dotfiles/issues/13).
 
 ## [0.1.1](https://github.com/apcountryman/dotfiles/compare/0.1.0...0.1.1) - 2019-11-16
 ### Fixed
