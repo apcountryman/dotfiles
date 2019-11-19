@@ -2,6 +2,9 @@
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
+### Changed
+- [Increase use of readonly in scripts](https://github.com/apcountryman/dotfiles/issues/14).
+
 ### Fixed
 - [Git hooks install script does not require that hooks be tracked/staged in Git](https://github.com/apcountryman/dotfiles/issues/13).
 
