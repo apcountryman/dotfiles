@@ -62,13 +62,26 @@ function display_help_text()
     echo "    $MNEMONIC ${SUPPORTED_HOOKS[*]}"
 }
 
+function valid_hook()
+{
+    local -r param_hook="$1"
+
+    for hook in "${SUPPORTED_HOOKS[@]}"; do
+        if [[ "$param_hook" == "$hook" ]]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 function validate_hooks()
 {
     while [[ "$#" -gt 0 ]]; do
         local param_hook="$1"
         shift
 
-        if [[ ! -x "$HOOKS/$param_hook" ]]; then
+        if ! valid_hook "$param_hook"; then
             abort "'$param_hook' is not a supported hook"
         fi
     done
