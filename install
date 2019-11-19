@@ -73,7 +73,7 @@ function display_version()
 
 function valid_dotfile()
 {
-    local param_dotfile="$1"
+    local -r param_dotfile="$1"
 
     for dotfile in "${SUPPORTED_DOTFILES[@]}"; do
         if [[ "$param_dotfile" == "$dotfile" ]]; then
@@ -98,17 +98,17 @@ function validate_dotfiles()
 
 function install_dotfile()
 {
-    local param_dotfile="$1"
+    local -r param_dotfile="$1"
 
-    local dotfile="$HOME/$param_dotfile"
+    local -r dotfile="$HOME/$param_dotfile"
 
     if [[ -L "$dotfile" ]]; then
         rm "$dotfile"
     fi
 
     if [[ -e "$dotfile" ]]; then
-        local archive="$HOME/dotfiles-archive"
-        local archived_dotfile="$archive/$param_dotfile"
+        local -r archive="$HOME/dotfiles-archive"
+        local -r archived_dotfile="$archive/$param_dotfile"
 
         if [[ ! -d "$archive" ]]; then
             if ! mkdir "$archive" >/dev/null; then
