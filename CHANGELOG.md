@@ -3,6 +3,16 @@ UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
 
+## [0.2.0](https://github.com/apcountryman/dotfiles/compare/0.1.1...0.2.0) - 2019-11-19
+### Added
+- [Git configuration](https://github.com/apcountryman/dotfiles/issues/16).
+
+### Changed
+- [Increase use of readonly in scripts](https://github.com/apcountryman/dotfiles/issues/14).
+
+### Fixed
+- [Git hooks install script does not require that hooks be tracked/staged in Git](https://github.com/apcountryman/dotfiles/issues/13).
+
 ## [0.1.1](https://github.com/apcountryman/dotfiles/compare/0.1.0...0.1.1) - 2019-11-16
 ### Fixed
 - [All-exclusionary pathspec patterns are not supported by older versions of Git](https://github.com/apcountryman/dotfiles/issues/9).
