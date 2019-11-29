@@ -53,6 +53,7 @@ function display_help_text()
     echo "    $MNEMONIC - Execute the dotfiles repository's Git pre-commit hook."
     echo "SYNOPSIS"
     echo "    $MNEMONIC --help"
+    echo "    $MNEMONIC"
     echo "OPTIONS"
     echo "    --help"
     echo "        Display this help text."
