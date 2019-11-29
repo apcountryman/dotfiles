@@ -17,8 +17,11 @@
 
 augroup filetypedetect
     " CMakeLists.txt variants
-    au! BufRead,BufNewFile CMakeLists.txt.*.in setfiletype cmake
     au! BufRead,BufNewFile CMakeLists.txt.*    setfiletype cmake
+    au! BufRead,BufNewFile CMakeLists.txt.*.in setfiletype cmake
+
+    " Markdown files
+    au! BufRead,BufNewFile *.md setfiletype markdown
 
     " Parallax P8X32A Propeller cog C/C++ files
     au! BufRead,BufNewFile *.cogc   setfiletype c
