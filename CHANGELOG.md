@@ -2,6 +2,8 @@
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
+
+## [0.3.0](https://github.com/apcountryman/dotfiles/compare/0.2.0...0.3.0) - 2019-11-29
 ### Added
 - [Markdown file type detection to Vim configuration](https://github.com/apcountryman/dotfiles/issues/23).
 
