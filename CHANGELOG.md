@@ -2,6 +2,8 @@
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
+### Added
+- [godlygeek/tabular Vim plugin](https://github.com/apcountryman/dotfiles/issues/28).
 
 ## [0.2.0](https://github.com/apcountryman/dotfiles/compare/0.1.1...0.2.0) - 2019-11-19
 ### Added
