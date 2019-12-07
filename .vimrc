@@ -19,6 +19,9 @@
 call plug#begin( '$HOME/.vim/extensions' )
     " color scheme
     Plug 'nanotech/jellybeans.vim'
+
+    " text alignment
+    Plug 'godlygeek/tabular'
 call plug#end()
 
 " general
