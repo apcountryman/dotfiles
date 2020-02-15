@@ -2,6 +2,8 @@
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
+### Added
+- [aklt/plantuml-syntax Vim plugin](https://github.com/apcountryman/dotfiles/issues/32).
 
 ## [0.4.0](https://github.com/apcountryman/dotfiles/compare/0.3.0...0.4.0) - 2019-12-07
 ### Added

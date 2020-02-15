@@ -22,6 +22,9 @@ call plug#begin( '$HOME/.vim/extensions' )
 
     " text alignment
     Plug 'godlygeek/tabular'
+
+    " PlantUML syntax
+    Plug 'aklt/plantuml-syntax'
 call plug#end()
 
 " general
