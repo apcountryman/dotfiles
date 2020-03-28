@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
+
+## [0.6.0](https://github.com/apcountryman/dotfiles/compare/0.5.0...0.6.0) - 2020-03-28
 ### Added
 - [Travis CI `shellcheck` job](https://github.com/apcountryman/dotfiles/issues/37).
 
