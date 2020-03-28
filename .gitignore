@@ -16,7 +16,7 @@
 # Description: Git ignore rules for the dotfiles repository.
 
 # ignore Vim extensions
-.vim/extensions/
+dotfiles/.vim/extensions/
 
 # ignore Vim netrwhist
-.vim/.netrwhist
+dotfiles/.vim/.netrwhist
