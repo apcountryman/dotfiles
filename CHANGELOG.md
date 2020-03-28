@@ -8,6 +8,9 @@ UTC is used when determining release dates.
 ### Added
 - [Travis CI `shellcheck` job](https://github.com/apcountryman/dotfiles/issues/37).
 
+### Changed
+- [Moved dotfiles to subdirectory](https://github.com/apcountryman/dotfiles/issues/39).
+
 ## [0.5.0](https://github.com/apcountryman/dotfiles/compare/0.4.0...0.5.0) - 2020-02-15
 ### Added
 - [aklt/plantuml-syntax Vim plugin](https://github.com/apcountryman/dotfiles/issues/32).
