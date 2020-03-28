@@ -12,24 +12,8 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitconfig
-# Description: Git configuration.
+# File: dotfiles/.gitignore
+# Description: Git ignore rules.
 
-[color]
-	ui = true
-
-[log]
-	decorate = auto
-
-[push]
-	default = tracking
-
-[user]
-	email = apcountryman@gmail.com
-	name = Andrew Countryman
-
-[core]
-	excludesFile = ~/.gitignore
-
-[include]
-	path = ~/.gitconfig_local
+# ignore Vim swap files
+*.sw*
