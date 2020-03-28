@@ -1,7 +1,12 @@
 # dotfiles Change Log
+All notable changes to this project are documented in this file.
+The format is based on [keep a changelog](https://keepachangelog.com/en/1.0.0/).
+This project adheres to [Semantic Versioning](https://semver.org/).
 UTC is used when determining release dates.
 
 ## [Unreleased](https://github.com/apcountryman/dotfiles/compare/master...develop)
+### Added
+- [Travis CI `shellcheck` job](https://github.com/apcountryman/dotfiles/issues/37).
 
 ## [0.5.0](https://github.com/apcountryman/dotfiles/compare/0.4.0...0.5.0) - 2020-02-15
 ### Added
@@ -32,7 +37,7 @@ UTC is used when determining release dates.
 ### Fixed
 - [All-exclusionary pathspec patterns are not supported by older versions of Git](https://github.com/apcountryman/dotfiles/issues/9).
 
-## [0.1.0](https://github.com/apcountryman/dotfiles/compare/cd276ce3083f6c130eae8b134a82247847ce06ed...0.1.0) - 2019-11-16
+## [0.1.0](https://github.com/apcountryman/dotfiles/compare/0.0.0...0.1.0) - 2019-11-16
 ### Added
 - Repository/user Git ignore rules.
 - Repository Git hooks install script.

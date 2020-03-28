@@ -19,9 +19,9 @@
 
 function message()
 {
-    local -r param_content="$1"
+    local -r content="$1"
 
-    echo -n "$MNEMONIC: $param_content"
+    echo -n "$mnemonic: $content"
 }
 
 function errors_found()
@@ -31,17 +31,17 @@ function errors_found()
 
 function error()
 {
-    local -r param_message="$1"
+    local -r message="$1"
 
-    ( >&2 echo "$MNEMONIC: $param_message" )
+    ( >&2 echo "$mnemonic: $message" )
 }
 
 function abort()
 {
     if [[ "$#" -gt 0 ]]; then
-        local -r param_message="$1"
+        local -r message="$1"
 
-        error "$param_message, aborting"
+        error "$message, aborting"
     fi
 
     exit 1
@@ -50,23 +50,35 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $MNEMONIC - Execute the dotfiles repository's Git pre-commit hook."
+    echo "    $mnemonic - Ensure:"
+    echo "        - Filenames are portable"
+    echo "        - No whitespace errors are present"
+    echo "        - No script errors are present"
     echo "SYNOPSIS"
-    echo "    $MNEMONIC --help"
-    echo "    $MNEMONIC"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic"
     echo "OPTIONS"
     echo "    --help"
     echo "        Display this help text."
+    echo "    --version"
+    echo "        Display the version of this script."
     echo "EXAMPLES"
-    echo "    $MNEMONIC --help"
-    echo "    $MNEMONIC"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic"
+}
+
+function display_version()
+{
+    echo "$mnemonic, version $version"
 }
 
 function ensure_filenames_are_portable()
 {
     message "checking for non-portable (non-ASCII) filenames ... "
 
-    if [[ $( git -C "$REPOSITORY" diff --cached --name-only --diff-filter=A -z "$AGAINST" | LC_ALL=C tr -d '[ -~]\0' | wc -c ) != 0 ]]; then
+    if [[ $( git -C "$repository" diff --cached --name-only --diff-filter=A -z "$against" | LC_ALL=C tr -d '[ -~]\0' | wc -c ) != 0 ]]; then
         errors_found
         error "aborting commit due to non-portable (non-ASCII) filename(s)"
         abort
@@ -79,10 +91,10 @@ function ensure_no_whitespace_errors_are_present()
 {
     message "checking for whitespace errors .................... "
 
-    if ! git -C "$REPOSITORY" diff-index --check --cached "$AGAINST" -- >/dev/null 2>&1; then
+    if ! git -C "$repository" diff-index --check --cached "$against" -- > "/dev/null" 2>&1; then
         errors_found
         error "aborting commit due to whitespace error(s), listed below"
-        git diff-index --check --cached "$AGAINST" --
+        git -C "$repository" diff-index --check --cached "$against" --
         abort
     fi
 
@@ -93,10 +105,9 @@ function ensure_no_script_errors_are_present()
 {
     message "checking for script errors ........................ "
 
-    local scripts
-    mapfile -t scripts < <( git -C "$REPOSITORY" ls-files -- . ':!:.vim/extensions/vim-plug' | xargs -r -d '\n' -I '{}' find "$REPOSITORY/"{} -executable ); readonly scripts
+    local scripts; mapfile -t scripts < <( git -C "$repository" ls-files ':!:.vim/extensions/vim-plug/' | xargs -r -d '\n' -I '{}' find "$repository/{}" -executable ); readonly scripts
 
-    if ! shellcheck "${scripts[@]}" >/dev/null 2>&1; then
+    if ! shellcheck "${scripts[@]}" > "/dev/null" 2>&1; then
         errors_found
         error "aborting commit due to script error(s), listed below"
         shellcheck "${scripts[@]}"
@@ -108,18 +119,22 @@ function ensure_no_script_errors_are_present()
 
 function main()
 {
-    SCRIPT=$( readlink -f "$0" ); readonly SCRIPT
-    MNEMONIC=$( basename "$SCRIPT" ); readonly MNEMONIC
-    HOOKS=$( dirname "$SCRIPT" ); readonly HOOKS
-    REPOSITORY=$( readlink -f "$HOOKS/../.." ); readonly REPOSITORY
+    local -r script=$( readlink -f "$0" )
+    local -r mnemonic=$( basename "$script" )
+    local -r hooks=$( dirname "$script" )
+    local -r repository=$( readlink -f "$hooks/../.." )
+    local -r version=$( git -C "$repository" describe --always --dirty --broken )
 
     while [[ "$#" -gt 0 ]]; do
-        local argument="$1"
-        shift
+        local argument="$1"; shift
 
         case "$argument" in
             --help)
                 display_help_text
+                exit
+                ;;
+            --version)
+                display_version
                 exit
                 ;;
             --*)
@@ -133,10 +148,10 @@ function main()
         esac
     done
 
-    if git rev-parse --verify HEAD >/dev/null 2>&1; then
-        AGAINST=HEAD; readonly AGAINST
+    if git -C "$repository" rev-parse --verify HEAD > "/dev/null" 2>&1; then
+        local -r against=HEAD
     else
-        AGAINST=$( git hash-object -t tree /dev/null ); readonly AGAINST
+        local -r against=$( git hash-object -t tree "/dev/null" )
     fi
 
     ensure_filenames_are_portable
