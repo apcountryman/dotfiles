@@ -2,7 +2,7 @@
 
 # dotfiles
 #
-# Copyright 2019 Andrew Countryman <apcountryman@gmail.com>
+# Copyright 2019, 2020 Andrew Countryman <apcountryman@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
 # file except in compliance with the License. You may obtain a copy of the License at
@@ -19,17 +19,17 @@
 
 function error()
 {
-    local -r param_message="$1"
+    local -r message="$1"
 
-    ( >&2 echo "$MNEMONIC: $param_message" )
+    ( >&2 echo "$mnemonic: $message" )
 }
 
 function abort()
 {
     if [[ "$#" -gt 0 ]]; then
-        local -r param_message="$1"
+        local -r message="$1"
 
-        error "$param_message, aborting"
+        error "$message, aborting"
     fi
 
     exit 1
@@ -38,12 +38,12 @@ function abort()
 function display_help_text()
 {
     echo "NAME"
-    echo "    $MNEMONIC - Install dotfiles."
+    echo "    $mnemonic - Install dotfiles."
     echo "SYNOPSIS"
-    echo "    $MNEMONIC --help"
-    echo "    $MNEMONIC --version"
-    echo "    $MNEMONIC --all"
-    echo "    $MNEMONIC [<dotfiles>]"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic --all"
+    echo "    $mnemonic [<dotfiles>]"
     echo "OPTIONS"
     echo "    --all"
     echo "        Install all supported dotfiles."
@@ -55,28 +55,28 @@ function display_help_text()
     echo "        The whitespace separated list of dotfiles to install. The following"
     echo "        dotfiles are supported:"
 
-    for dotfile in "${SUPPORTED_DOTFILES[@]}"; do
+    for dotfile in "${supported_dotfiles[@]}"; do
         echo "            $dotfile"
     done
 
     echo "EXAMPLES"
-    echo "    $MNEMONIC --help"
-    echo "    $MNEMONIC --version"
-    echo "    $MNEMONIC --all"
-    echo "    $MNEMONIC ${SUPPORTED_DOTFILES[*]}"
+    echo "    $mnemonic --help"
+    echo "    $mnemonic --version"
+    echo "    $mnemonic --all"
+    echo "    $mnemonic ${supported_dotfiles[*]}"
 }
 
 function display_version()
 {
-    echo "$MNEMONIC, version $( git -C "$REPOSITORY" describe --always --dirty --broken )"
+    echo "$mnemonic, version $version"
 }
 
 function valid_dotfile()
 {
-    local -r param_dotfile="$1"
+    local -r dotfile="$1"
 
-    for dotfile in "${SUPPORTED_DOTFILES[@]}"; do
-        if [[ "$param_dotfile" == "$dotfile" ]]; then
+    for supported_dotfile in "${supported_dotfiles[@]}"; do
+        if [[ "$dotfile" == "$supported_dotfile" ]]; then
             return 0
         fi
     done
@@ -86,73 +86,61 @@ function valid_dotfile()
 
 function validate_dotfiles()
 {
-    while [[ "$#" -gt 0 ]]; do
-        local param_dotfile="$1"
-        shift
-
-        if ! valid_dotfile "$param_dotfile"; then
-            abort "'$param_dotfile' is not a supported dotfile"
+    for dotfile in "${selected_dotfiles[@]}"; do
+        if ! valid_dotfile "$dotfile"; then
+            abort "'$dotfile' is not a supported dotfile"
         fi
     done
 }
 
-function install_dotfile()
+function install_dotfiles()
 {
-    local -r param_dotfile="$1"
+    local -r archive="$HOME/dotfiles-archive"
 
-    local -r dotfile="$HOME/$param_dotfile"
+    for selected_dotfile in "${selected_dotfiles[@]}"; do
+        local dotfile="$HOME/$selected_dotfile"
 
-    if [[ -L "$dotfile" ]]; then
-        rm "$dotfile"
-    fi
+        if [[ -L "$dotfile" ]]; then
+            rm "$dotfile"
+        fi
 
-    if [[ -e "$dotfile" ]]; then
-        local -r archive="$HOME/dotfiles-archive"
-        local -r archived_dotfile="$archive/$param_dotfile"
+        if [[ -e "$dotfile" ]]; then
+            local archived_dotfile="$archive/$selected_dotfile"
 
-        if [[ ! -d "$archive" ]]; then
-            if ! mkdir "$archive" >/dev/null; then
-                abort "archive directory creation failure"
+            if [[ ! -d "$archive" ]]; then
+                if ! mkdir "$archive" > "/dev/null"; then
+                    abort "archive directory creation failure"
+                fi
+            fi
+
+            if [[ -e "$archived_dotfile" ]]; then
+                abort "'$selected_dotfile' archive already exists"
+            fi
+
+            if ! mv "$dotfile" "$archived_dotfile" > "/dev/null"; then
+                abort "'$selected_dotfile' archival failure"
             fi
         fi
 
-        if [[ -e "$archived_dotfile" ]]; then
-            abort "'$param_dotfile' archive already exists"
+        if ! ln -s "$repository/dotfiles/$selected_dotfile" "$dotfile" > "/dev/null"; then
+            abort "'$selected_dotfile' installation failure"
         fi
-
-        if ! mv "$dotfile" "$archived_dotfile"; then
-            abort "'$param_dotfile' archive creation failure"
-        fi
-    fi
-
-    if ! ln -s "$REPOSITORY/$param_dotfile" "$dotfile"; then
-        abort "'$param_dotfile' installation failure"
-    fi
-}
-
-function install_dotfiles()
-{
-    while [[ "$#" -gt 0 ]]; do
-        local param_dotfile="$1"
-        shift
-
-        install_dotfile "$param_dotfile"
     done
 }
 
 function main()
 {
-    SCRIPT=$( readlink -f "$0" ); readonly SCRIPT
-    MNEMONIC=$( basename "$SCRIPT" ); readonly MNEMONIC
-    REPOSITORY=$( dirname "$SCRIPT" ); readonly REPOSITORY
+    local -r script=$( readlink -f "$0" )
+    local -r mnemonic=$( basename "$script" )
+    local -r repository=$( dirname "$script" )
+    local -r version=$( git -C "$repository" describe --always --dirty --broken )
 
-    mapfile -t SUPPORTED_DOTFILES < <( cd "$REPOSITORY" && git ls-files -- . ':!:.gitmodules' | cut -d / -f 1 | sort -u | xargs -r -d '\n' -I '{}' find {} -maxdepth 0 -name '.*' ); readonly SUPPORTED_DOTFILES
+    local supported_dotfiles; mapfile -t supported_dotfiles < <( git -C "$repository" ls-files dotfiles | cut -d / -f 2 | sort -u ); readonly supported_dotfiles
 
-    local dotfiles=()
+    local selected_dotfiles=()
 
     while [[ "$#" -gt 0 ]]; do
-        local argument="$1"
-        shift
+        local argument="$1"; shift
 
         case "$argument" in
             --help)
@@ -164,7 +152,7 @@ function main()
                 exit
                 ;;
             --all)
-                dotfiles=( "${SUPPORTED_DOTFILES[@]}" )
+                selected_dotfiles=( "${supported_dotfiles[@]}" )
                 break
                 ;;
             --*)
@@ -173,15 +161,15 @@ function main()
                 abort "'$argument' is not a supported option"
                 ;;
             *)
-                dotfiles+=( "$argument" )
+                selected_dotfiles+=( "$argument" )
                 ;;
         esac
     done
 
-    readonly dotfiles
+    readonly selected_dotfiles
 
-    validate_dotfiles "${dotfiles[@]}"
-    install_dotfiles "${dotfiles[@]}"
+    validate_dotfiles
+    install_dotfiles
 }
 
 main "$@"
