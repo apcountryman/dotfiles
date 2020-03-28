@@ -121,11 +121,11 @@ function install_dotfiles()
                 abort "'$selected_dotfile' archival failure"
             fi
         fi
-    done
 
-    if ! ln -s "$repository/$selected_dotfile" "$dotfile" > "/dev/null"; then
-        abort "'$selected_dotfile' installation failure"
-    fi
+        if ! ln -s "$repository/$selected_dotfile" "$dotfile" > "/dev/null"; then
+            abort "'$selected_dotfile' installation failure"
+        fi
+    done
 }
 
 function main()
