@@ -134,7 +134,7 @@ function main()
     local -r repository=$( dirname "$script" )
     local -r version=$( git -C "$repository" describe --always --dirty --broken )
 
-    local supported_dotfiles; mapfile -t supported_dotfiles < <( git -C "$repository" ls-files ':!:.gitmodules' | cut -d / -f 1 | sort -u | xargs -r -d '\n' -I '{}' find "{}" -maxdepth 0 -name '.*' ); readonly supported_dotfiles
+    local supported_dotfiles; mapfile -t supported_dotfiles < <( git -C "$repository" ls-files ':!:.gitmodules' ':!:.travis.yml' | cut -d / -f 1 | sort -u | xargs -r -d '\n' -I '{}' find "{}" -maxdepth 0 -name '.*' ); readonly supported_dotfiles
 
     local selected_dotfiles=()
 
