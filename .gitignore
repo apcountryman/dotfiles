@@ -13,13 +13,10 @@
 # permissions and limitations under the License.
 
 # File: .gitignore
-# Description: Git ignore rules for the dotfiles repository and user.
-
-# ignore Vim swap files
-*.sw*
+# Description: Git ignore rules for the dotfiles repository.
 
 # ignore Vim extensions
-.vim/extensions/
+dotfiles/.vim/extensions/
 
 # ignore Vim netrwhist
-.vim/.netrwhist
+dotfiles/.vim/.netrwhist

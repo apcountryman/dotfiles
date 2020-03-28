@@ -122,7 +122,7 @@ function install_dotfiles()
             fi
         fi
 
-        if ! ln -s "$repository/$selected_dotfile" "$dotfile" > "/dev/null"; then
+        if ! ln -s "$repository/dotfiles/$selected_dotfile" "$dotfile" > "/dev/null"; then
             abort "'$selected_dotfile' installation failure"
         fi
     done
@@ -135,7 +135,7 @@ function main()
     local -r repository=$( dirname "$script" )
     local -r version=$( git -C "$repository" describe --always --dirty --broken )
 
-    local supported_dotfiles; mapfile -t supported_dotfiles < <( git -C "$repository" ls-files ':!:.gitmodules' ':!:.travis.yml' | cut -d / -f 1 | sort -u | xargs -r -d '\n' -I '{}' find "{}" -maxdepth 0 -name '.*' ); readonly supported_dotfiles
+    local supported_dotfiles; mapfile -t supported_dotfiles < <( git -C "$repository" ls-files dotfiles | cut -d / -f 2 | sort -u ); readonly supported_dotfiles
 
     local selected_dotfiles=()
 

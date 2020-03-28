@@ -12,10 +12,24 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# File: .gitmodules
-# Description: Git submodules of the dotfiles repository.
+# File: dotfiles/.gitconfig
+# Description: Git configuration.
 
-# vim-plug (Vim plugin manager)
-[submodule ".vim/extensions/vim-plug"]
-	path = dotfiles/.vim/extensions/vim-plug
-	url = https://github.com/junegunn/vim-plug.git
+[color]
+	ui = true
+
+[log]
+	decorate = auto
+
+[push]
+	default = tracking
+
+[user]
+	email = apcountryman@gmail.com
+	name = Andrew Countryman
+
+[core]
+	excludesFile = ~/.gitignore
+
+[include]
+	path = ~/.gitconfig_local

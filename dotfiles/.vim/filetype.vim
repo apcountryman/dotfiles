@@ -12,7 +12,7 @@
 " KIND, either express or implied. See the License for the specific language governing
 " permissions and limitations under the License.
 
-" File: .vim/filetype.vim
+" File: dotfiles/.vim/filetype.vim
 " Description: Vim file type detection.
 
 augroup filetypedetect
