@@ -10,6 +10,7 @@ UTC is used when determining release dates.
 
 ### Changed
 - [Moved dotfiles to subdirectory](https://github.com/apcountryman/dotfiles/issues/39).
+- [Local override suffix to `-local`](https://github.com/apcountryman/dotfiles/issues/40).
 
 ## [0.5.0](https://github.com/apcountryman/dotfiles/compare/0.4.0...0.5.0) - 2020-02-15
 ### Added
