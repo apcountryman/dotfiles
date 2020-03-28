@@ -95,16 +95,17 @@ function validate_dotfiles()
 
 function install_dotfiles()
 {
+    local -r archive="$HOME/dotfiles-archive"
+
     for selected_dotfile in "${selected_dotfiles[@]}"; do
-        local -r dotfile="$HOME/$selected_dotfile"
+        local dotfile="$HOME/$selected_dotfile"
 
         if [[ -L "$dotfile" ]]; then
             rm "$dotfile"
         fi
 
         if [[ -e "$dotfile" ]]; then
-            local -r archive="$HOME/dotfiles-archive"
-            local -r archived_dotfile="$archive/$selected_dotfile"
+            local archived_dotfile="$archive/$selected_dotfile"
 
             if [[ ! -d "$archive" ]]; then
                 if ! mkdir "$archive" > "/dev/null"; then
