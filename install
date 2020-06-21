@@ -95,7 +95,7 @@ function validate_dotfiles()
 
 function install_dotfiles()
 {
-    local -r archive="$HOME/dotfiles-archive"
+    local -r archive="$repository-archive"
 
     for selected_dotfile in "${selected_dotfiles[@]}"; do
         local dotfile="$HOME/$selected_dotfile"
