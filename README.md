@@ -19,6 +19,13 @@ See the `install` script's help text for usage details.
 $ ./install --help
 ```
 
+## Versioning
+Post version 0.6.0, `dotfiles` will follow the [Abseil Live at Head
+philosophy](https://abseil.io/about/philosophy).
+
+## Workflow
+`dotfiles` uses the [GitHub flow](https://guides.github.com/introduction/flow/) workflow.
+
 ## Git Hooks
 To install this repository's Git hooks, run the `install` script located in the
 `git/hooks` directory.
