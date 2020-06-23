@@ -18,13 +18,13 @@
 " plugins
 call plug#begin( '$HOME/.vim/extensions' )
     " color scheme
-    Plug 'nanotech/jellybeans.vim'
+    Plug 'apcountryman/nanotech-jellybeans.vim'
 
     " text alignment
-    Plug 'godlygeek/tabular'
+    Plug 'apcountryman/godlygeek-tabular'
 
     " PlantUML syntax
-    Plug 'aklt/plantuml-syntax'
+    Plug 'apcountryman/aklt-plantuml-syntax'
 call plug#end()
 
 " general
