@@ -1,5 +1,5 @@
 # dotfiles
-[![Build Status](https://travis-ci.com/apcountryman/dotfiles.svg?branch=master)](https://travis-ci.com/apcountryman/dotfiles)
+![Static Analysis](https://github.com/apcountryman/dotfiles/workflows/Static%20Analysis/badge.svg)
 
 Andrew Countryman's personal dotfiles.
 
