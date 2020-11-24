@@ -1,5 +1,5 @@
 # dotfiles
-![Static Analysis](https://github.com/apcountryman/dotfiles/workflows/Static%20Analysis/badge.svg)
+![CI](https://github.com/apcountryman/dotfiles/workflows/CI/badge.svg)
 
 Andrew Countryman's personal dotfiles.
 
