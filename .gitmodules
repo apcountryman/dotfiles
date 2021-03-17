@@ -18,4 +18,4 @@
 # vim-plug (Vim plugin manager)
 [submodule ".vim/extensions/vim-plug"]
 	path = dotfiles/.vim/extensions/vim-plug
-	url = ../junegunn-vim-plug
+	url = ../vim-plug
