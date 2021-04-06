@@ -1,5 +1,5 @@
 # dotfiles
-![CI](https://github.com/apcountryman/dotfiles/workflows/CI/badge.svg)
+[![CI](https://github.com/apcountryman/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/apcountryman/dotfiles/actions/workflows/ci.yml)
 
 Andrew Countryman's personal dotfiles.
 
