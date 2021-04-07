@@ -1,5 +1,6 @@
 # dotfiles
 [![CI](https://github.com/apcountryman/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/apcountryman/dotfiles/actions/workflows/ci.yml)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 Andrew Countryman's personal dotfiles.
 
@@ -33,6 +34,11 @@ See the script's help text for usage details.
 ```
 $ ./git/hooks/install --help
 ```
+
+## Code of Conduct
+`dotfiles` has adopted the Contributor Covenant 2.0 code of conduct.
+For more information, [see the `CODE_OF_CONDUCT.md` file in this
+repository](CODE_OF_CONDUCT.md).
 
 ## Contributing
 If you are interested in contributing to `dotfiles`, please [read the `CONTRIBUTING.md`
