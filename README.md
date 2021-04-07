@@ -34,6 +34,10 @@ See the script's help text for usage details.
 $ ./git/hooks/install --help
 ```
 
+## Contributing
+If you are interested in contributing to `dotfiles`, please [read the `CONTRIBUTING.md`
+file in this repository](CONTRIBUTING.md).
+
 ## Authors
 - Andrew Countryman
 
