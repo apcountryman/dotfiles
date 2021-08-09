@@ -144,6 +144,10 @@ function main()
         local argument="$1"; shift
 
         case "$argument" in
+            --all)
+                selected_dotfiles=( "${supported_dotfiles[@]}" )
+                break
+                ;;
             --help)
                 display_help_text
                 exit
@@ -151,10 +155,6 @@ function main()
             --version)
                 display_version
                 exit
-                ;;
-            --all)
-                selected_dotfiles=( "${supported_dotfiles[@]}" )
-                break
                 ;;
             --*)
                 ;&
