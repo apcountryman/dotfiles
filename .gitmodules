@@ -13,7 +13,7 @@
 # KIND, either express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-# Description: Git submodules of the dotfiles repository.
+# Description: Git submodules.
 
 # vim-plug (Vim plugin manager)
 [submodule ".vim/extensions/vim-plug"]
