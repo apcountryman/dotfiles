@@ -74,7 +74,7 @@ function install_dotfiles()
 
     if [[ ! -d "$archive" ]]; then
         if ! mkdir "$archive"; then
-            abort
+            abort "archive directory creation failure"
         fi
     fi
 
@@ -86,7 +86,7 @@ function install_dotfiles()
 
         if [[ -L "$installed_dotfile" ]]; then
             if ! rm "$installed_dotfile"; then
-                abort "archive directory creation failed"
+                abort "symbolic link removal failure"
             fi
         fi
 
@@ -98,7 +98,7 @@ function install_dotfiles()
             fi
 
             if ! mv "$installed_dotfile" "$archived_dotfile"; then
-                abort "'$dotfile' archive creation failed"
+                abort "'$dotfile' archive creation failure"
             fi
         fi
 

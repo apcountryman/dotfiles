@@ -74,8 +74,7 @@ function install_git_hooks()
 
     local hook_script
     for hook_script in "${hook_scripts[@]}"; do
-        local hook
-        hook=$( basename "$hook_script" | cut -f 1 -d '.' )
+        local hook; hook=$( basename "$hook_script" | cut -f 1 -d '.' )
 
         rm -f "$repository/.git/hooks/$hook"
 
