@@ -103,7 +103,7 @@ function install_dotfiles()
         fi
 
         if ! ln -s "$repository/dotfiles/$dotfile" "$installed_dotfile"; then
-            abort "'$dotfile' installation failed"
+            abort "'$dotfile' installation failure"
         fi
     done
 }
