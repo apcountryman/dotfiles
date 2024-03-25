@@ -115,7 +115,7 @@ function main()
 
     validate_script
 
-    local -r repository=$( readlink -f "$( dirname "$script" )/../.." )
+    local -r repository=$( readlink -f "$( dirname "$script" )" )
     local -r version=$( git -C "$repository" describe --match=none --always --dirty --broken )
 
     while [[ "$#" -gt 0 ]]; do
