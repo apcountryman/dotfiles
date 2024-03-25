@@ -35,4 +35,4 @@ jobs:
                   submodules: recursive
             - name: Analyze
               shell: bash
-              run: ./ci/analyze --analyzer shellcheck
+              run: ./ci/analyze.sh --analyzer shellcheck
