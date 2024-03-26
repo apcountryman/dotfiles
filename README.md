@@ -36,7 +36,7 @@ dotfiles uses the [GitHub flow](https://guides.github.com/introduction/flow/) wo
 
 To install this repository's Git hooks, run the `install.sh` script located in the
 `git/hooks` directory.
-See the script's help text for usage details.
+See the `install.sh` script's help text for usage details.
 ```
 $ ./git/hooks/install.sh --help
 ```
